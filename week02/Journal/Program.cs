@@ -19,8 +19,8 @@ class Program
     static void Main(string[] args)
     {
 
-        Prompt _prompt = new Prompt();
-        Journal _journal = new Journal();
+        Prompt prompt = new Prompt();
+        Journal journal = new Journal();
 
         Console.WriteLine("Welcome to your journal!");
         DisplayMenu();
@@ -31,22 +31,22 @@ class Program
         {
             if (response == "1")
             {
-                Entry _entry = new Entry();
+                Entry entry = new Entry();
 
                 Console.WriteLine("Would you like a prompt? (y/n) ");
                 string wantsPrompt = Console.ReadLine().ToLower();
 
                 if (wantsPrompt == "y")
                 {
-                    string _promptText = _prompt.Random();
-                    Console.WriteLine(_promptText);
+                    string promptText = prompt.Random();
+                    Console.WriteLine(promptText);
                     string userResponse = Console.ReadLine();
 
                     if (!string.IsNullOrWhiteSpace(userResponse))
                     {
-                        _entry._promptText = _promptText;
-                        _entry._entry = userResponse;
-                        _journal.AddEntry(_entry);
+                        entry._promptText = promptText;
+                        entry._entry = userResponse;
+                        journal.AddEntry(entry);
                         Console.WriteLine("Entry recorded.");
                     }
                     else
@@ -61,8 +61,8 @@ class Program
 
                     if (!string.IsNullOrWhiteSpace(userResponse))
                     {
-                        _entry._entry = userResponse;
-                        _journal.AddEntry(_entry);
+                        entry._entry = userResponse;
+                        journal.AddEntry(entry);
                         Console.WriteLine("Entry recorded.");
                     }
                     else
@@ -75,9 +75,9 @@ class Program
             }
             else if (response == "2")
             {
-                if (_journal._entries.Count > 0)
+                if (journal._entries.Count > 0)
                 {
-                    _journal.DisplayAll();
+                    journal.DisplayAll();
                 }
                 else
                 {
@@ -86,7 +86,7 @@ class Program
             }
             else if (response == "3")
             {
-                if (_journal._entries.Count > 0)
+                if (journal._entries.Count > 0)
                 {
                     Console.WriteLine("Choose a file name: ");
                     string fileName = Console.ReadLine();
@@ -94,7 +94,7 @@ class Program
                     if (!fileName.EndsWith(".json"))
                     {
                         fileName += ".json";
-                        _journal.saveToFile(fileName);
+                        journal.saveToFile(fileName);
                     }
                     Console.WriteLine($"You have successfully created a file named '{fileName}'");
 
@@ -117,7 +117,7 @@ class Program
 
                     if (info.Length > 0)
                     {
-                        _journal.loadFromFile(fileName);
+                        journal.loadFromFile(fileName);
                         Console.WriteLine("Journal loaded successfully.");
                     }
                     else
