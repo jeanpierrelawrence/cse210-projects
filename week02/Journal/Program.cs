@@ -1,3 +1,16 @@
+/* CREATIVITY AND EXCEEDING REQUIREMENTS:
+1. Implemented JSON serialization/deserialization for more robust data storage, 
+   handling special characters and commas automatically.
+2. Created an advanced Prompt management system that tracks used prompts 
+   to ensure the user sees every prompt once before any repeats occur.
+3. Added a custom user flow allowing users to choose between a random prompt 
+   or a free-form entry ("What's on your mind?").
+4. Implemented conditional display logic so the "Prompt" header is hidden 
+   if the entry was free-form.
+5. Added filename validation using ternary operators to ensure the .json 
+   extension is always applied.
+*/
+
 using System;
 using System.IO;
 
