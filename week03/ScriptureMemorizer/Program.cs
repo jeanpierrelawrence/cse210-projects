@@ -1,3 +1,9 @@
+// Instead of a single verse, I added functionality that allowed the program to store a list of different scriptures from which the user could choose.
+// I also created a user menu which allows them to choose from the list of scriptures they have.
+// I refactored the main logic into specialized static methods (ChooseScripture, GetScripture, RunGame). This demonstrates the principle of Separation of Concerns by isolating the UI, the data factory, and the game loop.
+// I added a "Count-Validation Gate" in the HideRandomWords method. This prevents the program from freezing when the number of words left to hide is smaller than the requested hide amount.
+// I implemented a factory-style method that transforms raw, delimited strings into fully initialized Reference and Scripture objects, making the system easily expandable.
+
 using System;
 using System.Diagnostics.Metrics;
 

@@ -19,7 +19,7 @@ class Scripture
 
     public void HideRandomWords(int numberToHide)
     {
-        // 1. Calculate how many words are actually available to hide
+
         int visibleCount = 0;
         foreach (Word word in _words)
         {
