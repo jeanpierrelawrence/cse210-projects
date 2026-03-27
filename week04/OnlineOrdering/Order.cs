@@ -9,15 +9,24 @@ class Order
     }
     public double GetTotalCost()
     {
-        double total = 0;
+        double subtotal = 0;
 
         foreach (Product product in _order)
         {
-            double productAmt = product.CalculateTotal();
-            total += productAmt;
+            subtotal += product.CalculateTotal();
         }
 
-        return total;
+        double shippingCost;
+        if (_customer.IsInUS())
+        {
+            shippingCost = 5;
+        }
+        else
+        {
+            shippingCost = 35;
+        }
+
+        return subtotal + shippingCost;
     }
     public string GetPackingLabel()
     {
