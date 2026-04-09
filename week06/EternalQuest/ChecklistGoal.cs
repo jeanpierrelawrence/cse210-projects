@@ -29,4 +29,17 @@ public class ChecklistGoal : Goal
     {
         return $"ChecklistGoal|{GetShortName()}|{GetDescription()}|{GetPoints()}|{_bonus}|{_target}|{_amountCompleted}";
     }
+    public void SetAmountCompleted(int amount)
+    {
+        _amountCompleted = amount;
+    }
+    public override int GetPoints()
+    {
+        if (_amountCompleted >= _target)
+        {
+            return _points + _bonus;
+        }
+
+        return _points;
+    }
 }

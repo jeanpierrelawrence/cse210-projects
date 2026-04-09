@@ -5,6 +5,10 @@ public class SimpleGoal : Goal
     {
         _isComplete = false;
     }
+    public void SetComplete()
+    {
+        _isComplete = true;
+    }
     public override void RecordEvent()
     {
         _isComplete = true;
