@@ -2,12 +2,13 @@ public class GoalManager
 {
     private List<Goal> _goals = [];
     private int _score = 0;
+    private int _totalCompletions = 0;
     public void Start()
     {
         string input = "";
         while (input != "6")
         {
-            Console.WriteLine($"\nYou have {_score} points.\n");
+            Console.WriteLine($"\n{DisplayPlayerInfo()}\n");
             Console.WriteLine("Menu Options:");
             Console.WriteLine("  1. Create New Goal");
             Console.WriteLine("  2. List Goals");
@@ -29,14 +30,13 @@ public class GoalManager
             }
         }
     }
-    public int DisplayPlayerInfo()
+    public string DisplayPlayerInfo()
     {
-        return _score;
+        return $"Score: {_score} | Rank: {GetPlayerRank()} ({_totalCompletions} completions)";
     }
     public void LoadGoals()
     {
-        Console.Write("What is the filename for the goal file? ");
-        string filename = Console.ReadLine();
+        string filename = "goals.txt";
 
         if (!File.Exists(filename))
         {
@@ -49,8 +49,9 @@ public class GoalManager
         _goals.Clear();
 
         _score = int.Parse(lines[0]);
+        _totalCompletions = int.Parse(lines[1]);
 
-        for (int i = 1; i < lines.Length; i++)
+        for (int i = 2; i < lines.Length; i++)
         {
             string[] parts = lines[i].Split("|");
 
@@ -87,6 +88,7 @@ public class GoalManager
                 _goals.Add(goal);
             }
         }
+        Console.WriteLine("Goals loaded...");
     }
     public void SaveGoals()
     {
@@ -96,12 +98,12 @@ public class GoalManager
             return;
         }
 
-        Console.WriteLine("What would you like your file name to be? (e.g 'my_goals.txt') ");
-        string filename = Console.ReadLine();
+        string filename = "goals.txt";
 
         using (StreamWriter outputFile = new StreamWriter(filename))
         {
-            outputFile.WriteLine(DisplayPlayerInfo());
+            outputFile.WriteLine(_score);
+            outputFile.WriteLine(_totalCompletions);
 
             foreach (Goal goal in _goals)
             {
@@ -110,6 +112,29 @@ public class GoalManager
         }
 
         Console.WriteLine("Goals saved successfully.");
+    }
+    public string GetPlayerRank()
+    {
+        if (_totalCompletions <= 4)
+        {
+            return "Seedling";
+        }
+        else if (_totalCompletions <= 10)
+        {
+            return "Sprout";
+        }
+        else if (_totalCompletions <= 20)
+        {
+            return "Sapling";
+        }
+        else if (_totalCompletions <= 40)
+        {
+            return "Oak";
+        }
+        else
+        {
+            return "Ancient Forest";
+        }
     }
     public void RecordEvent()
     {
@@ -125,8 +150,11 @@ public class GoalManager
                 accomplishedGoal.RecordEvent();
                 _score += accomplishedGoal.GetPoints();
 
+                _totalCompletions++;
+
                 Console.WriteLine($"Congratulations! You earned {accomplishedGoal.GetPoints()} points!");
-                Console.WriteLine($"Your new score: {DisplayPlayerInfo()}");
+
+                SaveGoals();
             }
             else
             {

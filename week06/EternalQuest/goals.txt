@@ -1,4 +1,0 @@
-65
-SimpleGoal|Complete my homework|Complete all the WDD131 Week06 website project by Saturday as well as complete the Week06 CSE210 project by tonight|50|True
-EternalGoal|Read scriptures|Read a chapter of the BOM everyday|15|False
-ChecklistGoal|Workout |Do a workout everyday (arms, chest, legs, core)|15|50|7|1
